@@ -1,16 +1,14 @@
 document.addEventListener('DOMContentLoaded', event => {
   const app = firebase.app();
   const db = firebase.firestore();
-  const myPost = db.collection('posts').doc('firstpost');
+  const productsRef = db.collection('products');
 
-  myPost.onSnapshot(doc => {
-    const data = doc.data();
-    document.querySelector('#title').innerHTML = data.title;
+  const query = productsRef.where('price', '<=', 20);
+
+  query.get().then(products => {
+    products.forEach(doc => {
+      data = doc.data();
+      document.write(`${data.name} at $${data.price} <br>`);
+    });
   });
 });
-
-function updatePost(e) {
-  const db = firebase.firestore();
-  const myPost = db.collection('posts').doc('firstpost');
-  myPost.update({ title: e.target.value });
-}
