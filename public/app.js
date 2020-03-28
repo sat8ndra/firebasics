@@ -10,9 +10,9 @@ function uploadFile(files) {
 
   const task = horseRef.put(file);
 
-  task.then(snpashot => {
-    console.log(snpashot);
-    const url = snpashot.downloadURL;
+  task.then(snapshot => {
+    console.log(snapshot);
+    const url = snapshot.downloadURL;
     document.querySelector('#imgUpload').setAttribute('src', url);
   });
 }
