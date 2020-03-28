@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', event => {
   const db = firebase.firestore();
   const productsRef = db.collection('products');
 
-  const query = productsRef.where('price', '<=', 20);
+  const query = productsRef.orderBy('price', 'desc');
 
   query.get().then(products => {
     products.forEach(doc => {
